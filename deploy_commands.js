@@ -26,7 +26,9 @@ for (const folder of commandsFolder) {
   }
 }
 
-const rest = new REST().setToken(process.env.DISCORD_TOKEN)(async () => {
+const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+
+(async () => {
   try {
     console.log(
       `Started refreshing ${commands.length} application (/) commands`,

@@ -1,5 +1,5 @@
 import "dotenv/config";
-import client from "./bot.js";
+import { client } from "./bot.js";
 import { loadEvents } from "./utils/eventLoader.js";
 import { loadCommands } from "./utils/commandLoader.js";
 

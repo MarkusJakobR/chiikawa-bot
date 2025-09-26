@@ -1,4 +1,4 @@
-import { handleGuess } from "../services/hangman/gameLogic.js";
+import { handleGuess } from "../services/hangman/hangmanService.js";
 
 export default {
   name: "messageCreate",

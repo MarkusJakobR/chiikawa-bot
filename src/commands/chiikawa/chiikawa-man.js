@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "discord.js";
 
 export default {
-  data: new SlashCommandBuilder.setName("save-chiikawa").setDescription(
-    "Starts a game of hangman to save Chiikawa!",
-  ),
+  data: new SlashCommandBuilder()
+    .setName("save-chiikawa")
+    .setDescription("Starts a game of hangman to save Chiikawa!"),
   async execute(interaction) {
     const userId = interaction.user.id;
     const gameId = interaction.id;

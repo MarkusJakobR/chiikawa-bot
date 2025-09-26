@@ -1,4 +1,4 @@
-import { getSpotifyToken } from "./spotifyApi";
+import { getSpotifyToken } from "./spotifyApi.js";
 
 async function getPlaylistTracks(playlistId) {
   const token = await getSpotifyToken();

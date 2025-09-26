@@ -6,7 +6,7 @@ export function applyGuess(game, letter) {
   game.guessedLetters.push(letter);
 
   if (game.secretWord.includes(letter)) {
-    game.hiddenWord = secretWord
+    game.hiddenWord = game.secretWord
       .split("")
       .map((ch) =>
         ch === " " ? " " : game.guessedLetters.includes(ch) ? ch : "_",

@@ -1,11 +1,10 @@
-import { applyGuess, isWin, isLose } from "gamelogic.js";
+import { applyGuess, isWin, isLose } from "./gameLogic.js";
 import {
   buildUpdateMessage,
   buildWinningMessage,
   buildLosingMessage,
-} from "messages.js";
-import { getPlaylistTracks } from "../spotify/spotifyApi.js";
-import { isWin, isLose } from "../hangman/gameLogic.js";
+} from "./messages.js";
+import { getPlaylistTracks, MY_PLAYLIST } from "../spotify/playlistService.js";
 
 const activeGames = {};
 const MAX_TRIES = 7;
@@ -16,6 +15,7 @@ function getGame(channelId) {
 
 async function startGame(interaction) {
   const channelId = interaction.channelId;
+  const channel = await interaction.client.channels.fetch(channelId);
 
   const words = await getPlaylistTracks(MY_PLAYLIST);
   const tries = MAX_TRIES;
@@ -40,7 +40,7 @@ async function startGame(interaction) {
   };
   const startEmbed = buildUpdateMessage(game, 0x5865f2, "start");
 
-  const startMsg = await interaction.channel.send({
+  const startMsg = await channel.send({
     content: "A new game has started!",
     embeds: [startEmbed],
   });
@@ -50,9 +50,12 @@ async function startGame(interaction) {
 
   return;
 }
+
 async function handleGuess(message) {
   const channelId = message.channel.id;
   const game = getGame(channelId);
+
+  console.log("Recieved: ", message.content);
 
   if (!game || message.author.id !== game.playerId || message.author.bot) {
     console.log("Detected invalid message");
@@ -61,7 +64,7 @@ async function handleGuess(message) {
 
   if (
     message.content.length !== 1 ||
-    !/[a-zA-Z0-9()-"']/i.test(message.content)
+    !/[a-zA-Z0-9()\-"']/i.test(message.content)
   ) {
     return;
   }
@@ -70,7 +73,9 @@ async function handleGuess(message) {
   const { alreadyGuessed, correct } = applyGuess(game, guessedLetter);
 
   if (alreadyGuessed) {
-    const reply = await message.reply(`You already guessed **${letter}**!`);
+    const reply = await message.reply(
+      `You already guessed **${guessedLetter}**!`,
+    );
     setTimeout(() => reply.delete(), 3000);
     return;
   }
