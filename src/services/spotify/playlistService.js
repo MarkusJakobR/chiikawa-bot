@@ -1,13 +1,15 @@
 import { getSpotifyToken } from "./spotifyApi.js";
 
+// calls the api to fetch the tracks in a certain playlist id
 async function getPlaylistTracks(playlistId) {
   const token = await getSpotifyToken();
   const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
 
-  console.log("--- Spotify Request Details ---");
-  console.log("Request URL: ", url);
-  console.log("Access Token Used: ", token);
-  console.log("--------------------------------");
+  // used for debugging
+  // console.log("--- Spotify Request Details ---");
+  // console.log("Request URL: ", url);
+  // console.log("Access Token Used: ", token);
+  // console.log("--------------------------------");
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -28,6 +30,7 @@ async function getPlaylistTracks(playlistId) {
   return data.items.map((item) => item.track.name);
 }
 
+// for certain playlists (only personal playlists are able to be fetched, not spotify made ones)
 const TOP50_PH = "37i9dQZEVXbNBz9cRCSFkY";
 const TOP50_GLOBAL = "37i9dQZEVXbMDoHDwVN2tF";
 const MY_PLAYLIST = "0gAVMCYREjceFfjG5phYxl";

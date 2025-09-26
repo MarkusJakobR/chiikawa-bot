@@ -1,3 +1,4 @@
+// collection of gifs used for the chiikawa hangman game
 export function randomGif(type) {
   const arr = gifs[type];
   return arr[Math.floor(Math.random() * arr.length)];

@@ -1,5 +1,6 @@
 import { startGame } from "../services/hangman/hangmanService.js";
 
+// handling events when a button is pressed (i.e., when user presses button for saving chiikawa, it starts the game)
 export default {
   name: "interactionCreate",
   async execute(interaction) {

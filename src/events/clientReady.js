@@ -1,5 +1,4 @@
-import { client } from "../bot.js";
-
+// event for getting the client ready
 export default {
   name: "clientReady",
   once: true,

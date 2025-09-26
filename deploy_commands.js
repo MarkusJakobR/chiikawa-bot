@@ -3,6 +3,8 @@ import { REST, Routes } from "discord.js";
 import fs from "fs";
 import path from "path";
 
+// script for deploying and registering new commands added
+// only run once when a new command is added using 'node deploy_commands.js'
 const commands = [];
 const commandsPath = path.join(process.cwd(), "src", "commands");
 const commandsFolder = fs.readdirSync(commandsPath);

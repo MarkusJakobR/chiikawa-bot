@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 
+// creates a command for the hangman chiikawa
 export default {
   data: new SlashCommandBuilder()
     .setName("save-chiikawa")
@@ -8,6 +9,7 @@ export default {
     const userId = interaction.user.id;
     const gameId = interaction.id;
 
+    // creates the initial interaction after entering the command
     await interaction.reply({
       content: `Go save Chiikawa, <@${userId}>!`,
       components: [

@@ -1,6 +1,7 @@
 import { EmbedBuilder } from "discord.js";
 import { randomGif } from "../../utils/gifs.js";
 
+// for building the messages that is always updated
 export function buildUpdateMessage(game, color, type) {
   return new EmbedBuilder()
     .setTitle("Guess the word to save Chiikawa!")
@@ -25,6 +26,7 @@ export function buildUpdateMessage(game, color, type) {
     .setImage(randomGif(type));
 }
 
+// for building the message after winning
 export function buildWinningMessage(game, color, type) {
   return new EmbedBuilder()
     .setTitle("🎉 Congratulations! You saved Chiikawa!")
@@ -44,6 +46,7 @@ export function buildWinningMessage(game, color, type) {
     .setImage(randomGif("win"));
 }
 
+// for building the message after losing
 export function buildLosingMessage(game, color, type) {
   return new EmbedBuilder()
     .setTitle("💀 You lost! Chiikawa is stuck in jail..")

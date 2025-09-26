@@ -2,6 +2,7 @@ import { Collection } from "discord.js";
 import fs from "fs";
 import path from "path";
 
+// this loads the commands inside the /commands directory
 export async function loadCommands(client) {
   client.commands = new Collection();
   const commandsPath = path.join(process.cwd(), "src", "commands");

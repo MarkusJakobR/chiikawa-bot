@@ -1,3 +1,4 @@
+// to fetch the token i have from spotify
 export async function getSpotifyToken() {
   const params = new URLSearchParams();
   params.append("grant_type", "client_credentials");
