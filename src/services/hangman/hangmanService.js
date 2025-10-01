@@ -87,7 +87,7 @@ async function handleGuess(message) {
   // checks if the message is not equal to 1 valid character
   if (
     message.content.length !== 1 ||
-    !/[a-zA-Z0-9()\-"']/i.test(message.content)
+    !/[a-zA-Z0-9()\-\"\']/i.test(message.content)
   ) {
     return;
   }
