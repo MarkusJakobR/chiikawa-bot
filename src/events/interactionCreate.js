@@ -1,4 +1,5 @@
 import { startGame } from "../services/hangman/hangmanService.js";
+import { startTimer } from "../services/pomodoro/pomodoroService.js";
 
 // handling events when a button is pressed (i.e., when user presses button for saving chiikawa, it starts the game)
 export default {
@@ -28,6 +29,13 @@ export default {
       if (componentId.startsWith("accept_button_")) {
         await interaction.deferUpdate();
         await startGame(interaction);
+      } else if (componentId.startsWith("start_button_")) {
+        const parts = componentId.split("_");
+        const studyMinutes = parseInt(parts[3], 10);
+        const breakMinutes = parseInt(parts[4], 10);
+
+        await interaction.deferUpdate();
+        await startTimer(interaction, studyMinutes, breakMinutes);
       }
     }
   },

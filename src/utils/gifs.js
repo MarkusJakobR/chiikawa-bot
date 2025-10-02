@@ -22,4 +22,12 @@ const gifs = {
     "https://media.tenor.com/duB8JcH5gfcAAAAd/chiikawa-chiikawa-sad.gif",
     "https://media.tenor.com/QM4ZESS5tpUAAAAd/ちいかわ-chiikawa.gif",
   ],
+  pomodoroStart: [
+    "https://media.tenor.com/1BFHnnDXzLUAAAAC/chiikawa-anime.gif",
+    "https://media.tenor.com/E6_0TW7CryUAAAAd/치이카와-공부.gif",
+  ],
+  pomodoroBreak: [
+    "https://media.tenor.com/GqtvmuVYW1QAAAAC/치이카와-공부.gif",
+    "https://media.tenor.com/sd69ZJxsOyYAAAAC/치이카와-공부.gif",
+  ],
 };
