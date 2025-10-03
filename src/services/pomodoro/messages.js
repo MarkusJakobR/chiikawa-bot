@@ -6,7 +6,7 @@ export function buildStartTimer(timer, color, type) {
   return new EmbedBuilder()
     .setTitle(`Timer starts now! Good luck, ${timer.displayName}!`)
     .setDescription(
-      `Timer will last for ${timer.studyMinutes} minutes. You have until ${timer.endTime} to focus!`,
+      `Timer will last for ${timer.studyMinutes} min. You have until ${timer.endTime} to focus!`,
     )
     .setColor(color)
     .setFooter({
@@ -19,7 +19,7 @@ export function buildBreakTimer(timer, color, type) {
   return new EmbedBuilder()
     .setTitle(`Break time! Great work, ${timer.displayName}!`)
     .setDescription(
-      `Break will last for ${timer.breakMinutes} minutes. You have until ${timer.endTime} to rest and recover!`,
+      `Break will last for ${timer.breakMinutes} min. You have until ${timer.endTime} to rest and recover!`,
     )
     .setColor(color)
     .setFooter({
