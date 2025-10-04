@@ -18,6 +18,13 @@ export default {
         .setDescription("Number of break minutes")
         .setMinValue(1)
         .setMaxValue(30),
+    )
+    .addIntegerOption((option) =>
+      option
+        .setName("cycle")
+        .setDescription("Number of pomodoro cycles")
+        .setMinValue(1)
+        .setMaxValue(10),
     ),
   async execute(interaction) {
     const userId = interaction.user.id;
@@ -25,12 +32,15 @@ export default {
 
     const studyMinutes = interaction.options.getInteger("study") ?? 25;
     const breakMinutes = interaction.options.getInteger("break") ?? 5;
+    const cycles = interaction.options.getInteger("cycle") ?? 1;
 
     // creates the initial interaction after entering the command
     await interaction.reply({
       content:
         `Study well and focused, <@${userId}>!\n\n` +
-        `⏰ Study Time: **${studyMinutes}** min. \t| \t😴 Break Time: **${breakMinutes}** min.`,
+        `⏰ Study Time: **${studyMinutes}** min. \t| \t😴 Break Time: **${breakMinutes}** min.\n\n` +
+        `This timer will repeat for **${cycles}**` +
+        (cycles == 1 ? " cycle" : " cycles"),
       components: [
         {
           type: 1,
@@ -39,7 +49,7 @@ export default {
               type: 2,
               style: 1,
               label: "Start Timer",
-              custom_id: `start_button_${timerId}_${studyMinutes}_${breakMinutes}`,
+              custom_id: `start_button_${timerId}_${studyMinutes}_${breakMinutes}_${cycles}`,
             },
           ],
         },

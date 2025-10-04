@@ -30,4 +30,8 @@ const gifs = {
     "https://media.tenor.com/GqtvmuVYW1QAAAAC/치이카와-공부.gif",
     "https://media.tenor.com/sd69ZJxsOyYAAAAC/치이카와-공부.gif",
   ],
+  pomodoroEnd: [
+    "https://media.tenor.com/EFLU-gvNNmEAAAAC/chiikawa-dance.gif",
+    "https://media.tenor.com/W8wgkqbr9m0AAAAC/chiikawa-exercise.gif",
+  ],
 };

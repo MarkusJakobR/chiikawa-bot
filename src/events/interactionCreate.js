@@ -33,9 +33,10 @@ export default {
         const parts = componentId.split("_");
         const studyMinutes = parseInt(parts[3], 10);
         const breakMinutes = parseInt(parts[4], 10);
+        const cycles = parseInt(parts[5], 10);
 
         await interaction.deferUpdate();
-        await startTimer(interaction, studyMinutes, breakMinutes);
+        await startTimer(interaction, studyMinutes, breakMinutes, cycles);
       }
     }
   },
