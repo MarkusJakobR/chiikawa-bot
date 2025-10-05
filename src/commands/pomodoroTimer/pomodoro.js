@@ -1,4 +1,10 @@
-import { SlashCommandBuilder } from "discord.js";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  SlashCommandBuilder,
+} from "discord.js";
+import { startTimer } from "../../services/pomodoro/pomodoroService.js";
 
 // creates a command for the pomodoro command
 export default {
@@ -35,26 +41,67 @@ export default {
     const cycles = interaction.options.getInteger("cycle") ?? 1;
 
     // creates the initial interaction after entering the command
-    await interaction.reply({
+    // await interaction.reply({
+    //   content:
+    //     `Study well and focused, <@${userId}>!\n\n` +
+    //     `⏰ Study Time: **${studyMinutes}** min. \t| \t😴 Break Time: **${breakMinutes}** min.\n\n` +
+    //     `This timer will repeat for **${cycles}**` +
+    //     (cycles == 1 ? " cycle" : " cycles"),
+    //   components: [
+    //     {
+    //       type: 1,
+    //       components: [
+    //         {
+    //           type: 2,
+    //           style: 1,
+    //           label: "Start Timer",
+    //           custom_id: `start_button_${timerId}_${studyMinutes}_${breakMinutes}_${cycles}`,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    //   ephemeral: true,
+    // });
+
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId(
+          `start_button_${timerId}_${studyMinutes}_${breakMinutes}_${cycles}`,
+        )
+        .setLabel("Start Session")
+        .setStyle(ButtonStyle.Success),
+    );
+
+    const response = await interaction.reply({
       content:
-        `Study well and focused, <@${userId}>!\n\n` +
+        `Ready to start your pomodoro session, <@${userId}>?\n\n` +
         `⏰ Study Time: **${studyMinutes}** min. \t| \t😴 Break Time: **${breakMinutes}** min.\n\n` +
         `This timer will repeat for **${cycles}**` +
         (cycles == 1 ? " cycle" : " cycles"),
-      components: [
-        {
-          type: 1,
-          components: [
-            {
-              type: 2,
-              style: 1,
-              label: "Start Timer",
-              custom_id: `start_button_${timerId}_${studyMinutes}_${breakMinutes}_${cycles}`,
-            },
-          ],
-        },
-      ],
+      components: [row],
       ephemeral: true,
+      fetchReply: true,
     });
+    const filter = (i) => i.user.id === interaction.user.id;
+
+    try {
+      const confirmation = await response.awaitMessageComponent({
+        filter,
+        time: 60000,
+      });
+      if (confirmation.customId.startsWith("start_button_")) {
+        await confirmation.update({
+          content: "Your pomodoro session is starting...",
+          components: [],
+        });
+
+        await startTimer(interaction, studyMinutes, breakMinutes, cycles);
+      }
+    } catch {
+      await interaction.editReply({
+        content: "Confirmation not received within 1 minute. Cancelling...",
+        components: [],
+      });
+    }
   },
 };
