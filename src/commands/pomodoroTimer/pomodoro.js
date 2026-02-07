@@ -34,34 +34,11 @@ export default {
     ),
   async execute(interaction) {
     const userId = interaction.user.id;
-    const timerId = interaction.id;
+    const timerId = interaction.channelId + interaction.user.id;
 
     const studyMinutes = interaction.options.getInteger("study") ?? 25;
     const breakMinutes = interaction.options.getInteger("break") ?? 5;
     const cycles = interaction.options.getInteger("cycle") ?? 1;
-
-    // creates the initial interaction after entering the command
-    // await interaction.reply({
-    //   content:
-    //     `Study well and focused, <@${userId}>!\n\n` +
-    //     `⏰ Study Time: **${studyMinutes}** min. \t| \t😴 Break Time: **${breakMinutes}** min.\n\n` +
-    //     `This timer will repeat for **${cycles}**` +
-    //     (cycles == 1 ? " cycle" : " cycles"),
-    //   components: [
-    //     {
-    //       type: 1,
-    //       components: [
-    //         {
-    //           type: 2,
-    //           style: 1,
-    //           label: "Start Timer",
-    //           custom_id: `start_button_${timerId}_${studyMinutes}_${breakMinutes}_${cycles}`,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   ephemeral: true,
-    // });
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()

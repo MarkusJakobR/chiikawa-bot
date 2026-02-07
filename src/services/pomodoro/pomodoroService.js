@@ -1,6 +1,4 @@
 import { buildStartTimer, buildBreakTimer, buildEndTimer } from "./messages.js";
-// const STUDY_MINUTES = 0.05;
-// const BREAK_MINUTES = 5;
 
 const activePomodoro = {};
 
@@ -34,7 +32,7 @@ function startSession(timer, interaction) {
           embeds: [timer.breakEmbed],
         });
         timer.timeoutId = setTimeout(() => {
-          startSession(interaction, timer);
+          startSession(timer, interaction);
         }, timer.breakMinutes * 60000);
       } else {
         timer.endEmbed = buildEndTimer(timer, "F5D2D2", "pomodoroEnd");
@@ -84,4 +82,13 @@ async function startTimer(interaction, studyMinutes, breakMinutes, cycles) {
   startSession(timer, interaction);
 }
 
-export { startTimer };
+function cancelSession(timerId) {
+  if (activePomodoro[timerId]) {
+    clearTimeout(activePomodoro[timerId].timeoutId);
+    delete activePomodoro[timerId];
+    return true;
+  }
+  return false;
+}
+
+export { startTimer, cancelSession };

@@ -68,10 +68,8 @@ export function buildEndTimer(timer, color, type) {
       {
         name: "Total Rest Time",
         value:
-          timer.currCycle == 1
-            ? "None"
-            : `${timer.breakMinutes * (timer.currCycle - 1)}` +
-              (timer.breakMinutes == 1 ? " minute" : " minutes"),
+          `${timer.breakMinutes * (timer.currCycle - 1)}` +
+          (timer.breakMinutes == 1 ? " minute" : " minutes"),
         inline: true,
       },
     )
