@@ -141,5 +141,5 @@ async function handleGuess(message) {
   // this deletes the message in the channel to keep the channel readable
   await message.delete();
 }
-
+// test add
 export { handleGuess, startGame, getGame };
